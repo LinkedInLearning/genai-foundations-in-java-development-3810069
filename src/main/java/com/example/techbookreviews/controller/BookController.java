@@ -1,9 +1,11 @@
 package com.example.techbookreviews.controller;
 
 import com.example.techbookreviews.entity.Book;
-import com.example.techbookreviews.repository.BookRepository;
+import com.example.techbookreviews.entity.Review;
+import com.example.techbookreviews.service.BookService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,29 +15,37 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
 
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+
+    private final BookService bookService;
+
     @Autowired
-    private BookRepository bookRepository;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public ResponseEntity<List<Book>> getAllBooks() {
+        logger.info("Fetching all books");
+        return ResponseEntity.ok(bookService.getAllBooks());
     }
 
     @PostMapping
-    public Book createBook(@RequestBody Book book) {
-        return bookRepository.save(book);
+    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+        logger.info("Creating new book: {}", book.getTitle());
+        return ResponseEntity.ok(bookService.createBook(book));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
-        return bookRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        logger.info("Fetching book with ID: {}", id);
+        return ResponseEntity.ok(bookService.getBookById(id));
     }
+
 
     @GetMapping("/popular")
     public ResponseEntity<List<Book>> getTopPopularBooks(@RequestParam int count) {
-        List<Book> popularBooks = bookRepository.findTopPopularBooks(PageRequest.of(0, count));
-        return ResponseEntity.ok(popularBooks);
+        logger.info("Fetching top {} popular books", count);
+        return ResponseEntity.ok(bookService.getTopPopularBooks(count));
     }
 }
