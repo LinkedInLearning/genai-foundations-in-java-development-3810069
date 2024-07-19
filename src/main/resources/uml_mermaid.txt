@@ -1,0 +1,92 @@
+classDiagram
+    class Book {
+        Long id
+        String title
+        String author
+        String isbn
+        List~Review~ reviews
+        Long getId()
+        void setId(Long)
+        String getTitle()
+        void setTitle(String)
+        String getAuthor()
+        void setAuthor(String)
+        String getIsbn()
+        void setIsbn(String)
+        List~Review~ getReviews()
+        void setReviews(List~Review~)
+    }
+
+    class Review {
+        Long id
+        String reviewerName
+        String content
+        int rating
+        Book book
+        Long getId()
+        void setId(Long)
+        String getReviewerName()
+        void setReviewerName(String)
+        String getContent()
+        void setContent(String)
+        int getRating()
+        void setRating(int)
+        Book getBook()
+        void setBook(Book)
+    }
+
+    class BookRepository {
+        List~Book~ findAll()
+        Book save(Book)
+        Optional~Book~ findById(Long)
+        List~Book~ findTopPopularBooks(Pageable)
+    }
+
+    class ReviewRepository {
+        Review save(Review)
+        Optional~Review~ findById(Long)
+        Double findAverageRatingByBookId(Long)
+    }
+
+    class BookService {
+        - BookRepository bookRepository
+        List~Book~ getAllBooks()
+        Book createBook(Book)
+        Book getBookById(Long)
+        List~Book~ getTopPopularBooks(int)
+    }
+
+    class BookController {
+        - BookService bookService
+        ResponseEntity~List~Book~~ getAllBooks()
+        ResponseEntity~Book~ createBook(Book)
+        ResponseEntity~Book~ getBookById(Long)
+        ResponseEntity~List~Book~~ getTopPopularBooks(int)
+    }
+
+    class ReviewController {
+        - ReviewRepository reviewRepository
+        - BookRepository bookRepository
+        ResponseEntity~List~Review~~ getAllReviews(Long)
+        ResponseEntity~Review~ addReview(Long, Review)
+        ResponseEntity~Double~ getAverageRating(Long)
+    }
+
+    class ResourceNotFoundException {
+        ResourceNotFoundException(String)
+    }
+
+    class ExceptionHandlerController {
+        ResponseEntity~?~ resourceNotFoundException(ResourceNotFoundException, WebRequest)
+        ResponseEntity~?~ globalExceptionHandler(Exception, WebRequest)
+    }
+
+    Book  "1" -- "*" Review
+    BookRepository  --|> JpaRepository
+    ReviewRepository  --|> JpaRepository
+    BookService  -->  BookRepository
+    BookController  -->  BookService
+    ReviewController  -->  ReviewRepository
+    ReviewController  -->  BookRepository
+    ExceptionHandlerController  --|> ExceptionHandler
+    ResourceNotFoundException  --|> RuntimeException

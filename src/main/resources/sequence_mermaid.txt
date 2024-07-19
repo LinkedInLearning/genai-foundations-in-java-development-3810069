@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant Client
+    participant BookController
+    participant BookService
+    participant BookRepository
+
+    Client->>+BookController: POST /books
+    BookController->>+BookService: createBook(book)
+    BookService->>+BookRepository: save(book)
+    BookRepository-->>-BookService: book
+    BookService-->>-BookController: book
+    BookController-->>-Client: book
