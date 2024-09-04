@@ -1,6 +1,10 @@
 # GenAI Foundations in Java Development
 This is the repository for the LinkedIn Learning course `GenAI Foundations in Java Development`. The full course is available from [LinkedIn Learning][lil-course-url].
 
+![lil-thumbnail-url]
+
+Harness the power of ChatGPT to supercharge your Java coding skills with the finesse of a master coder. In this course, mathematician and software developer Terezija Semenski shows you how to bring the finesse of a master coder to your generative AI endeavors. Get a step-by-step guide on using ChatGPT for Java development. Find out how to accelerate your coding journey with ChatGPT and go over the benefits and limitations of using AI. Learn how to write your first app, troubleshoot it, and use it in IntelliJ IDE. Go beyond basic coding and explore ways to use AI to follow clean code principles, craft test cases, and generate UML and sequence diagrams. Plus, get ready for your next interview as you incorporate ChatGPT into mock interviews and writing a compelling resume. This course is packed with example prompts that you can copy, paste, and use to easily follow along.
+
 _See the readme file in the main branch for updated instructions and information._
 ## Instructions
 This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
@@ -20,15 +24,18 @@ To resolve this issue:
     Add changes to git using this command: git add .
 	Commit changes using this command: git commit -m "some message"
 
-## Installing
-1. To use these exercise files, you must have the following installed:
-	- [list of requirements for course]
-2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
-3. [Course-specific instructions]
+### Instructor
 
+Terezija Semenski
+
+Software Developer, Mathematician, Writer, and Learner
+
+                            
+
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/terezija-semenski?u=104).
 
 [0]: # (Replace these placeholder URLs with actual course URLs)
 
-[lil-course-url]: https://www.linkedin.com/learning/
-[lil-thumbnail-url]: http://
+[lil-course-url]: https://www.linkedin.com/learning/genai-foundations-in-java-development
+[lil-thumbnail-url]: https://media.licdn.com/dms/image/v2/D4E0DAQGBlB84xwvztA/learning-public-crop_675_1200/learning-public-crop_675_1200/0/1724100155427?e=2147483647&v=beta&t=oFo3EbJd434qw5XsE3_dOdCH7BcsaFFMh9dDw9Z6HTU
 
